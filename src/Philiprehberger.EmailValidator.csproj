@@ -8,7 +8,7 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageId>Philiprehberger.EmailValidator</PackageId>
-    <Version>0.1.0</Version>
+    <Version>0.1.1</Version>
     <Authors>Philip Rehberger</Authors>
     <Description>RFC 5321/5322 compliant email address validation with international domain support and structured error messages.</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>

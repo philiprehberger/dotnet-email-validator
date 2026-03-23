@@ -4,10 +4,6 @@
 
 RFC 5321/5322 compliant email address validation with international domain support and structured error messages.
 
-## Requirements
-
-- .NET 8.0+
-
 ## Installation
 
 ```bash
