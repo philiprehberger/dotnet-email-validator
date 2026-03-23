@@ -1,6 +1,8 @@
 # Philiprehberger.EmailValidator
 
-[![CI](https://github.com/philiprehberger/dotnet-email-validator/actions/workflows/ci.yml/badge.svg)](https://github.com/philiprehberger/dotnet-email-validator/actions/workflows/ci.yml) [![NuGet](https://img.shields.io/nuget/v/Philiprehberger.EmailValidator)](https://www.nuget.org/packages/Philiprehberger.EmailValidator) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![CI](https://github.com/philiprehberger/dotnet-email-validator/actions/workflows/ci.yml/badge.svg)](https://github.com/philiprehberger/dotnet-email-validator/actions/workflows/ci.yml)
+[![NuGet](https://img.shields.io/nuget/v/Philiprehberger.EmailValidator.svg)](https://www.nuget.org/packages/Philiprehberger.EmailValidator)
+[![License](https://img.shields.io/github/license/philiprehberger/dotnet-email-validator)](LICENSE)
 
 RFC 5321/5322 compliant email address validation with international domain support and structured error messages.
 

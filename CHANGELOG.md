@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.2 (2026-03-23)
+
+- Fix README badge order and format
+
 ## 0.1.1 (2026-03-22)
 
 - Improve README compliance: remove Requirements section
