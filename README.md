@@ -3,6 +3,7 @@
 [![CI](https://github.com/philiprehberger/dotnet-email-validator/actions/workflows/ci.yml/badge.svg)](https://github.com/philiprehberger/dotnet-email-validator/actions/workflows/ci.yml)
 [![NuGet](https://img.shields.io/nuget/v/Philiprehberger.EmailValidator.svg)](https://www.nuget.org/packages/Philiprehberger.EmailValidator)
 [![License](https://img.shields.io/github/license/philiprehberger/dotnet-email-validator)](LICENSE)
+[![Sponsor](https://img.shields.io/badge/sponsor-GitHub%20Sponsors-ec6cb9)](https://github.com/sponsors/philiprehberger)
 
 RFC 5321/5322 compliant email address validation with international domain support and structured error messages.
 
@@ -69,4 +70,4 @@ dotnet build src/Philiprehberger.EmailValidator.csproj --configuration Release
 
 ## License
 
-MIT
+[MIT](LICENSE)
