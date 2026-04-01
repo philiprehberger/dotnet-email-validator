@@ -314,6 +314,78 @@ public static class EmailValidator
     }
 
     /// <summary>
+    /// Validates an email address and suggests a correction if the domain appears to be a typo of a common provider.
+    /// </summary>
+    /// <param name="email">The email address to validate.</param>
+    /// <returns>A <see cref="ValidationResult"/> containing the validation outcome, with a <see cref="ValidationResult.Suggestion"/> if a domain typo was detected.</returns>
+    public static ValidationResult ValidateWithSuggestion(string email)
+    {
+        var result = Validate(email);
+
+        var trimmed = email?.Trim();
+        if (trimmed is null)
+        {
+            return result;
+        }
+
+        var atIndex = trimmed.LastIndexOf('@');
+        if (atIndex <= 0 || atIndex >= trimmed.Length - 1)
+        {
+            return result;
+        }
+
+        var domain = trimmed[(atIndex + 1)..];
+        var suggestion = TypoSuggestion.SuggestDomain(domain);
+
+        if (suggestion is null)
+        {
+            return result;
+        }
+
+        var suggestedEmail = trimmed[..(atIndex + 1)] + suggestion;
+
+        return result with { Suggestion = suggestedEmail };
+    }
+
+    /// <summary>
+    /// Validates multiple email addresses.
+    /// </summary>
+    /// <param name="emails">The email addresses to validate.</param>
+    /// <returns>A read-only list of <see cref="ValidationResult"/> in the same order as the input.</returns>
+    /// <exception cref="ArgumentNullException">Thrown when <paramref name="emails"/> is <c>null</c>.</exception>
+    public static IReadOnlyList<ValidationResult> ValidateMany(IEnumerable<string> emails)
+    {
+        ArgumentNullException.ThrowIfNull(emails);
+
+        return emails.Select(Validate).ToList().AsReadOnly();
+    }
+
+    /// <summary>
+    /// Checks whether the email domain belongs to a known disposable email provider.
+    /// </summary>
+    /// <param name="email">The email address to check.</param>
+    /// <returns><c>true</c> if the domain is a known disposable provider; otherwise, <c>false</c>.</returns>
+    public static bool IsDisposable(string email)
+    {
+        if (string.IsNullOrWhiteSpace(email))
+        {
+            return false;
+        }
+
+        var trimmed = email.Trim();
+        var atIndex = trimmed.LastIndexOf('@');
+
+        if (atIndex <= 0 || atIndex >= trimmed.Length - 1)
+        {
+            return false;
+        }
+
+        var domain = trimmed[(atIndex + 1)..];
+
+        return DisposableDomains.IsDisposable(domain);
+    }
+
+    /// <summary>
     /// Creates a failed validation result with the specified error message.
     /// </summary>
     /// <param name="error">The error message describing why validation failed.</param>

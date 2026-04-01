@@ -4,7 +4,7 @@
 [![NuGet](https://img.shields.io/nuget/v/Philiprehberger.EmailValidator.svg)](https://www.nuget.org/packages/Philiprehberger.EmailValidator)
 [![Last updated](https://img.shields.io/github/last-commit/philiprehberger/dotnet-email-validator)](https://github.com/philiprehberger/dotnet-email-validator/commits/main)
 
-RFC 5321/5322 compliant email address validation with international domain support and structured error messages.
+RFC 5321/5322 compliant email validation with typo suggestions, disposable email detection, and bulk validation.
 
 ## Installation
 
@@ -51,6 +51,39 @@ var result = EmailValidator.Validate("user@münchen.de");
 // result.NormalizedAddress   → "user@xn--mnchen-3ya.de"
 ```
 
+### Typo Suggestions
+
+```csharp
+using Philiprehberger.EmailValidator;
+
+var result = EmailValidator.ValidateWithSuggestion("user@gmial.com");
+// result.IsValid    → true
+// result.Suggestion → "user@gmail.com"
+```
+
+### Disposable Email Detection
+
+```csharp
+using Philiprehberger.EmailValidator;
+
+bool disposable = EmailValidator.IsDisposable("user@mailinator.com");
+// true
+
+bool legit = EmailValidator.IsDisposable("user@gmail.com");
+// false
+```
+
+### Bulk Validation
+
+```csharp
+using Philiprehberger.EmailValidator;
+
+var results = EmailValidator.ValidateMany(new[] { "a@b.com", "invalid", "c@d.org" });
+// results[0].IsValid → true
+// results[1].IsValid → false
+// results[2].IsValid → true
+```
+
 ## API
 
 | Member | Returns | Description |
@@ -60,6 +93,11 @@ var result = EmailValidator.Validate("user@münchen.de");
 | `ValidationResult.IsValid` | `bool` | Whether the email address is valid. |
 | `ValidationResult.Error` | `string?` | Error message if invalid, null if valid. |
 | `ValidationResult.NormalizedAddress` | `string?` | Lowercased, trimmed email if valid, null if invalid. |
+| `ValidationResult.Suggestion` | `string?` | Suggested corrected email if a domain typo was detected, null otherwise. |
+| `ValidationResult.IsDisposable` | `bool` | Whether the email domain belongs to a known disposable email provider. |
+| `EmailValidator.ValidateWithSuggestion(string email)` | `ValidationResult` | Validates and suggests a correction if the domain is a typo of a common provider. |
+| `EmailValidator.ValidateMany(IEnumerable<string> emails)` | `IReadOnlyList<ValidationResult>` | Validates multiple email addresses and returns results in order. |
+| `EmailValidator.IsDisposable(string email)` | `bool` | Checks whether the email domain is a known disposable provider. |
 
 ## Development
 

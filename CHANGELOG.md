@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.0 (2026-03-31)
+
+- Add domain typo suggestions for common email providers via ValidateWithSuggestion
+- Add disposable email detection via IsDisposable
+- Add bulk validation via ValidateMany
+
 ## 0.1.4 (2026-03-31)
 
 - Standardize README to 3-badge format with emoji Support section
